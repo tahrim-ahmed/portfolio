@@ -3,6 +3,17 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+(function () {
+  try {
+    const stored = localStorage.getItem('theme');
+    const theme = (stored === 'light' || stored === 'dark')
+      ? stored
+      : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {}
+})();
+</script>
 <title>Tahrim Ahmed Miad - Frontend & Shopify Developer</title>
 <meta name="description" content="Portfolio of Tahrim Ahmed Miad - Frontend Developer & Shopify Specialist available for remote work worldwide. React, TypeScript, Shopify Liquid, and e-commerce experiences." />
 <link rel="icon" href="data:,">
@@ -33,6 +44,15 @@
     </nav>
 
     <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
       <a class="btn btn--ghost btn--sm" href="assets/resume/Tahrim_Ahmed_Miad_Resume.pdf" target="_blank" rel="noopener">Resume</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>

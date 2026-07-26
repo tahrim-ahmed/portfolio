@@ -107,11 +107,33 @@ function initYear(): void {
   if (el) el.textContent = String(new Date().getFullYear());
 }
 
+type Theme = 'light' | 'dark';
+
+function applyTheme(theme: Theme): void {
+  document.documentElement.setAttribute('data-theme', theme);
+  try {
+    localStorage.setItem('theme', theme);
+  } catch (e) {
+    // localStorage unavailable (private browsing, etc.) — theme just won't persist.
+  }
+}
+
+function initThemeToggle(): void {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const current: Theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    applyTheme(current === 'light' ? 'dark' : 'light');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initSmoothScroll();
   initScrollReveal();
   initBackToTop();
   initActiveNavHighlight();
+  initThemeToggle();
   initYear();
 });
